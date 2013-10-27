@@ -5,7 +5,7 @@ use Aws\S3\Exception\S3Exception;
 
 class S3Storage
 {
-    public static function isValid($file)
+    public static function isValidUpload($file)
     {
         if (is_array($file)) {
             if (!empty($file['tmp_name']) && empty($file['error'])) {
@@ -47,7 +47,7 @@ class S3Storage
             return 'http://' . Configure::read('Amazon.bucket') . DS . $uri;
             
         } catch (S3Exception $e) {
-            return false;
+            return FALSE;
         }
     }
 }
