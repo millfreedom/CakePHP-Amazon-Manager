@@ -16,11 +16,6 @@ class S3Storage
         return FALSE;
     }
 
-    public static function storeFile($id, $file, $model)
-    {
-        return static::pushToS3($file, );
-    }
-    
     public static function pushToS3($id, $file, $model)
     {
         $uri = $model->name . DS . $id;
