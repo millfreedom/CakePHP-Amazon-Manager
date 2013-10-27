@@ -3,7 +3,7 @@
 use Aws\Common\Aws;
 use Aws\S3\Exception\S3Exception;
 
-class S3Storage
+class AmazonUtility
 {
     public static function isValidUpload($file)
     {
