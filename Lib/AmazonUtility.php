@@ -18,7 +18,7 @@ class AmazonUtility
 
     public static function pushToS3($id, $file, $model)
     {
-        $uri = $model->name . DS . $id;
+        $uri = $model->name . '/' . $id;
         
         $config = [
             'key' => Configure::read('Amazon.key'),
@@ -30,7 +30,7 @@ class AmazonUtility
         
         // Upload a publicly accessible file. The file size, file type, and MD5 hash are automatically calculated by the SDK
         try {       
-            $type = explode(DS, $file['type']);
+            $type = explode('/', $file['type']);
             
             if (!empty($type[1])) {
                 $uri = $uri . '.' . $type[1];
@@ -44,7 +44,7 @@ class AmazonUtility
                 'ContentType'  => $file['type']
             ));
             
-            return 'http://' . Configure::read('Amazon.bucket') . DS . $uri;
+            return 'http://' . Configure::read('Amazon.bucket') . '/' . $uri;
             
         } catch (S3Exception $e) {
             return FALSE;
