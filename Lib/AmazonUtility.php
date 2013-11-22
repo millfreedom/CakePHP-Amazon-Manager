@@ -36,15 +36,14 @@ class AmazonUtility
                 $uri = $uri . '.' . $type[1];
             }
             
-            $s3->putObject(array(
+            $result = $s3->putObject(array(
                 'Bucket' => Configure::read('Amazon.bucket'),
-                'Key'    => $uri,
-                'Body'   => fopen($file['tmp_name'], 'r'),
-                'ACL'    => 'public-read',
-                'ContentType'  => $file['type']
-            ));
-            
-            return 'http://' . Configure::read('Amazon.bucket') . DS . $uri;
+                'Key' => $uri,
+                'Body' => fopen($file['tmp_name'], 'r'),
+                'ACL' => 'public-read',
+                'ContentType' => $file['type']
+                    ));
+            return $result['ObjectURL'];
             
         } catch (S3Exception $e) {
             return FALSE;
